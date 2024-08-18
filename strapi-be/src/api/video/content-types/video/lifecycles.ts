@@ -1,49 +1,49 @@
-const ffmpeg = require('fluent-ffmpeg'); 
-
-function getVideoDurationInSeconds(videoPath) { 
-    return new Promise((resolve, reject) => { 
-        ffmpeg.ffprobe(videoPath, (err, metadata) => { 
-            if (err) { 
-                reject(err); 
-            } else { 
-                const duration = metadata.format.duration;
-                resolve(duration); 
-            } 
-        }); 
-    }); 
-}
+const { getVideoDurationInSeconds } = require("get-video-duration");
 
 module.exports = {
-    async beforeCreate(event) {
-        // const { data, files }  = event.params;
-        console.log("🚀 ~ beforeCreate ~ data, files:", JSON.stringify(event));
+  async beforeCreate(event) {
+    const { data } = event.params;
 
-        throw new Error("Not implemented");
+    if (data.video) {
+      try {
+        const file = await strapi.entityService.findOne(
+          "plugin::upload.file",
+          data.video,
+          {
+            fields: ["url"],
+          }
+        );
 
-        // debugger
-        // if(files.video && files.video.path) {
-        //     try {
-        //         const durationInSeconds = await getVideoDurationInSeconds(files.video.path);
-        //         data.duration = durationInSeconds;
-        //     } catch (error) {
-        //         console.log('Error getting video duration: ', error);
-        //     }
-        // }
+        const durationInSeconds = await getVideoDurationInSeconds(
+          process.env.BASE_URL + file.url
+        );
 
-        // if(!data.publishDate) {
-        //     data.publishDate = new Date()
-        // }
-    },
-    async beforeUpdate(event) {
-        // const { data, files }  = event.params;
+        data.duration = Math.trunc(durationInSeconds);
+        if (!data.publishDate) data.publishDate = new Date();
+      } catch (error) {
+        console.log("Error getting video duration: ", error);
+      }
+    }
+  },
+  async beforeUpdate(event) {
+    const { data } = event.params;
+    if (data.video) {
+      try {
+        const file = await strapi.entityService.findOne(
+          "plugin::upload.file",
+          data.video,
+          {
+            fields: ["url"],
+          }
+        );
+        const durationInSeconds = await getVideoDurationInSeconds(
+          process.env.BASE_URL + file.url
+        );
 
-        // if(files.video && files.video.path) {
-        //     try {
-        //         const durationInSeconds = await getVideoDurationInSeconds(files.video.path);
-        //         data.duration = durationInSeconds;
-        //     } catch (error) {
-        //         console.log('Error getting video duration: ', error);
-        //     }
-        // }
-    },
-}
+        data.duration = durationInSeconds;
+      } catch (error) {
+        console.log("Error getting video duration: ", error);
+      }
+    }
+  },
+};
