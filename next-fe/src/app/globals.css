@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.blog_card_overlay_gradient {
+  @apply bg-gradient-to-t from-black to-transparent
+}

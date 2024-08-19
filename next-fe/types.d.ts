@@ -21,8 +21,18 @@ interface BlogPost extends Post {
   image: ThumbnailImage
 }
 
+interface VideoType {
+  name: string
+  size: number
+  url: string
+}
+
 interface Video extends Post {
-  video: File
+  id: number
+  title: string
+  slug: string
+  publishDate: Date
   videoDescription: string
-  duration?: number
+  duration: string
+  video: VideoType
 }
