@@ -1,17 +1,28 @@
-
-export async function GET(
-    request: Request,
-    { params }: { params: { id: string } }
-) {
+export async function GET() {
+  try {
     const queryParams = new URLSearchParams({
-        populate: '*'
+      populate: '*'
     })
-    const data = await fetch(`${process.env.BASE_URL}/blogs/${params.id}?${queryParams.toString()}`, {
+    const data = await fetch(
+      `${process.env.BASE_URL}/blogs?${queryParams.toString()}`,
+      {
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.STRAPI_TOKEN}`
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${process.env.STRAPI_TOKEN}`
         }
-    }).then(res => res.json())
+      }
+    ).then(res => res.json())
 
-    return Response.json(data)
+    return Response.json({
+      status: 'success',
+      data: { data: data ?? {}, meta: data.meta },
+      error: null
+    })
+  } catch (error: any) {
+    return Response.json({
+      status: 'error',
+      data: null,
+      error: error.message
+    })
+  }
 }
