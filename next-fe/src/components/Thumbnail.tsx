@@ -1,4 +1,4 @@
-import { getPublicMediaUrl } from '@/actions'
+import { getPublicMediaUrl } from '@/services/getPublicPath'
 import Image from 'next/image'
 import React from 'react'
 import { twMerge } from 'tailwind-merge'

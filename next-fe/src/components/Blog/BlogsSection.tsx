@@ -1,8 +1,7 @@
-import { getBlogs } from '@/services'
-import React from 'react'
 import { Button } from '@/components'
-import Link from 'next/link'
 import { Blog } from '@/components/Blog'
+import { getBlogs } from '@/services'
+import Link from 'next/link'
 
 type Props = {
   page?: number
@@ -14,7 +13,7 @@ export const BlogsSection = async ({ asRoute = false, page = 1, pageSize = 1000 
   const blogs = await getBlogs(page, pageSize)
   return (
     <section className='flex flex-col'>
-      <h2 className='text-4xl font-semibold text-center mb-6'>{asRoute ? 'Blog Page': 'Recent Blog Posts'}</h2>
+      <h2 className='text-4xl font-semibold text-center mb-6'>{asRoute ? `Blog Page`: 'Recent Blog Posts'}</h2>
       <div className='grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3'>
         {!(blogs instanceof Error) ? (
           <>
