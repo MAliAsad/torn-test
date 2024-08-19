@@ -80,3 +80,13 @@ We will be looking at:
 -   Bonus points for additional features or optimizations
 
 Good luck! We're excited to see your solution.
+
+
+---------------------------------------------
+
+# How to run
+
+- Create a `.env` file and and fill the server (strapi) base url in BASE_URL field, and client base url in NEXT_PUBLIC_SERVER_URL field.
+- Start the project as described above.
+- Generate a strapi token from strapi `admin panel > settings` and fill it in STRAPI_TOKEN field.
+- A `dummy-env.txt` file is also provided in `next-fe` folder for better understanding.

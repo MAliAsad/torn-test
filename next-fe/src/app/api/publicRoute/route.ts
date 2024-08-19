@@ -4,7 +4,7 @@ export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams
     const path = searchParams.get('path')
-    const mediaPath = `${process.env.PUBLIC_URL}${path ?? '/'}`
+    const mediaPath = `${process.env.BASE_URL}${path ?? '/'}`
 
     return Response.json({
       status: 'success',

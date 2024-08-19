@@ -11,7 +11,7 @@ class ApiService {
 
   constructor() {
     this.apiClient = axios.create({
-      baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
+      baseURL: process.env.NEXT_PUBLIC_SERVER_URL + '/api',
       headers: {
         'Content-Type': 'application/json'
       }

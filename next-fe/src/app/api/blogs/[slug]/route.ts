@@ -9,7 +9,7 @@ export async function GET(request: Request, context: { params: Params }) {
       ['filters[slug][$eq]']: slug
     })
 
-    const data = await fetch(`${process.env.BASE_URL}/blogs?${queryParams.toString()}`, {
+    const data = await fetch(`${process.env.BASE_URL}/api/blogs?${queryParams.toString()}`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${process.env.STRAPI_TOKEN}`

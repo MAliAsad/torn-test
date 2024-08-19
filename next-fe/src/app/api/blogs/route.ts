@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
       queryParams.append(key, value)
     }
     
-    const data = await fetch(`${process.env.BASE_URL}/blogs?${queryParams.toString()}`, {
+    const data = await fetch(`${process.env.BASE_URL}/api/blogs?${queryParams.toString()}`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${process.env.STRAPI_TOKEN}`
