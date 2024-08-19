@@ -12,11 +12,10 @@ export const Video = async ({
   publishDate,
   video: { url }
 }: Props) => {
-  const videoUrl = await getPublicMediaUrl(url)
 
   return (
     <div className='shadow-sm bg-white border rounded-xl overflow-hidden flex flex-col'>
-      <ClientVideo videoUrl={videoUrl as string} controls />
+      <ClientVideo url={url} controls  />
       <VideoCardTextContent
         title={title}
         body={videoDescription}

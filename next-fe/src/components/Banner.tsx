@@ -29,13 +29,12 @@ export const Banner = async ({ className, image }: Props) => {
 
 export const BannerVideo = async ({ video }: BannerVideoProps) => {
   const { url } = video?.video
-  const videoUrl = await getPublicMediaUrl(url)
   return (
     <div className='flex'>
       <ClientVideo
         className='w-auto rounded-3xl overflow-hidden mx-auto h-[calc(100vh-10rem)]'
         controls
-        videoUrl={videoUrl as string}
+        url={url}
       />
     </div>
   )
